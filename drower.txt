@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muller HTML Learning Classes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            animation: bgAnimation 2s infinite;
+            padding: 20px;
+        }
+
+        @keyframes bgAnimation {
+            0% { background: linear-gradient(45deg, blue, green); }
+            25% { background: linear-gradient(45deg, red, #5f27cd); }
+            50% { background: linear-gradient(45deg, black, red); }
+            75% { background: linear-gradient(45deg, green, blue); }
+            100% { background: linear-gradient(45deg, #5f27cd, red); }
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: purple;
+            padding: 90px;
+            border-radius: 35px;
+            box-shadow: 0 30px 500px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            color: #333;
+            margin-bottom: 90px;
+            font-size: 34px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 15px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-container button:hover {
+            background: blue;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 55px;
+            animation: blink 2s infinite;
+        }
+
+        .success-message {
+            font-weight: bold;
+            font-size: 30px;
+            margin-top: 55px;
+            animation: colorBlink 2s infinite, blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.3; }
+        }
+
+        @keyframes colorBlink {
+            0% { color: red; }
+            20% { color: black; }
+            40% { color: yellow; }
+            60% { color: green; }
+            80% { color: blue; }
+            100% { color: purple; }
+        }
+
+        .main-content {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .main-content h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 32px;
+            text-transform: uppercase;
+        }
+
+        .day-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid red;
+        }
+
+        .day-section h2 {
+            color: red;
+            margin-bottom: 15px;
+        }
+
+        .day-section h3 {
+            color: #555;
+            margin: 15px 0 10px 0;
+        }
+
+        .day-section p, .day-section li {
+            color: #666;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .day-section ul {
+            margin-left: 20px;
+        }
+
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .questions-section {
+            margin: 40px 0;
+            padding: 25px;
+            background: #fff3cd;
+            border-radius: 10px;
+            border-left: 5px solid blue;
+        }
+
+        .questions-section h2 {
+            color: blue;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .question strong {
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+        }
+
+        .footer button {
+            margin: 10px;
+            padding: 12px 30px;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .footer button:hover {
+            background: red;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <h1>🔐 Access Required</h1>
+        <p>Enter password to access HTML classes</p>
+        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <button onclick="checkPassword()">Enter</button>
+        <div id="message"></div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1>MULLER HTML LEARNING CLASSES</h1>
+
+        <div class="day-section">
+            <h2>📚 Day 1: Introduction to HTML</h2>
+            <h3>What is HTML?</h3>
+            <p>HTML (HyperText Markup Language) is the standard markup language for creating web pages. It describes the structure of a web page using elements and tags.</p>
+            
+            <h3>Basic HTML Structure</h3>
+            <div class="code-example">
+&lt;!DOCTYPE html&gt;<br>
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+    &lt;title&gt;My First Page&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+    &lt;h1&gt;Hello World!&lt;/h1&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+            </div>
+
+            <h3>Key Concepts:</h3>
+            <ul>
+                <li>Every HTML document starts with &lt;!DOCTYPE html&gt;</li>
+                <li>&lt;html&gt; is the root element</li>
+                <li>&lt;head&gt; contains meta information</li>
+                <li>&lt;body&gt; contains the visible content</li>
+            </ul>
+        </div>
+
+        <div class="day-section">
+            <h2>📚 Day 2: Text Elements and Headings</h2>
+            <h3>Headings</h3>
+            <p>HTML has 6 levels of headings from &lt;h1&gt; to &lt;h6&gt;, where h1 is the largest and h6 is the smallest.</p>
+            
+            <div class="code-example">
+&lt;h1&gt;Main Heading&lt;/h1&gt;<br>
+&lt;h2&gt;Sub Heading&lt;/h2&gt;<br>
+&lt;h3&gt;Smaller Heading&lt;/h3&gt;<br>
+&lt;p&gt;This is a paragraph.&lt;/p&gt;<br>
+&lt;p&gt;Text can be &lt;strong&gt;bold&lt;/strong&gt; or &lt;em&gt;italic&lt;/em&gt;.&lt;/p&gt;
+            </div>
+
+            <h3>Other Text Elements:</h3>
+            <ul>
+                <li>&lt;p&gt; - Paragraph</li>
+                <li>&lt;strong&gt; - Bold text (important)</li>
+                <li>&lt;em&gt; - Italic text (emphasis)</li>
+                <li>&lt;br&gt; - Line break</li>
+                <li>&lt;hr&gt; - Horizontal rule</li>
+            </ul>
+        </div>
+
+        <div class="day-section">
+            <h2>📚 Day 3: Lists and Links</h2>
+            <h3>Lists</h3>
+            <div class="code-example">
+&lt;!-- Unordered List --&gt;<br>
+&lt;ul&gt;<br>
+    &lt;li&gt;Item 1&lt;/li&gt;<br>
+    &lt;li&gt;Item 2&lt;/li&gt;<br>
+&lt;/ul&gt;<br><br>
+&lt;!-- Ordered List --&gt;<br>
+&lt;ol&gt;<br>
+    &lt;li&gt;First&lt;/li&gt;<br>
+    &lt;li&gt;Second&lt;/li&gt;<br>
+&lt;/ol&gt;
+            </div>
+
+            <h3>Links</h3>
+            <div class="code-example">
+&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;<br>
+&lt;a href="https://example.com" target="_blank"&gt;Open in New Tab&lt;/a&gt;
+            </div>
+        </div>
+
+        <div class="day-section">
+            <h2>📚 Day 4: Images and Media</h2>
+            <h3>Adding Images</h3>
+            <div class="code-example">
+&lt;img src="image.jpg" alt="Description of image"&gt;<br>
+&lt;img src="photo.jpg" alt="Photo" width="300" height="200"&gt;
+            </div>
+
+            <h3>Key Attributes:</h3>
+            <ul>
+                <li>src - Source of the image</li>
+                <li>alt - Alternative text for accessibility</li>
+                <li>width/height - Dimensions in pixels</li>
+            </ul>
+        </div>
+
+        <div class="day-section">
+            <h2>📚 Day 5: Tables</h2>
+            <h3>Creating Tables</h3>
+            <div class="code-example">
+&lt;table border="1"&gt;<br>
+    &lt;tr&gt;<br>
+        &lt;th&gt;Name&lt;/th&gt;<br>
+        &lt;th&gt;Age&lt;/th&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;tr&gt;<br>
+        &lt;td&gt;John&lt;/td&gt;<br>
+        &lt;td&gt;25&lt;/td&gt;<br>
+    &lt;/tr&gt;<br>
+&lt;/table&gt;
+            </div>
+
+            <h3>Table Elements:</h3>
+            <ul>
+                <li>&lt;table&gt; - Table container</li>
+                <li>&lt;tr&gt; - Table row</li>
+                <li>&lt;th&gt; - Table header</li>
+                <li>&lt;td&gt; - Table data cell</li>
+            </ul>
+        </div>
+
+        <div class="day-section">
+            <h2>📚 Day 6: Forms - Part 1</h2>
+            <h3>Basic Form Structure</h3>
+            <div class="code-example">
+&lt;form action="/submit" method="post"&gt;<br>
+    &lt;label for="name"&gt;Name:&lt;/label&gt;<br>
+    &lt;input type="text" id="name" name="name"&gt;<br><br>
+    &lt;label for="email"&gt;Email:&lt;/label&gt;<br>
+    &lt;input type="email" id="email" name="email"&gt;<br><br>
+    &lt;input type="submit" value="Submit"&gt;<br>
+&lt;/form&gt;
+            </div>
+
+            <h3>Input Types:</h3>
+            <ul>
+                <li>text - Single line text</li>
+                <li>email - Email address</li>
+                <li>password - Password field</li>
+                <li>number - Numeric input</li>
+                <li>submit - Submit button</li>
+            </ul>
+        </div>
+
+        <div class="day-section">
+            <h2>📚 Day 7: Forms - Part 2 & Semantic HTML</h2>
+            <h3>More Form Elements</h3>
+            <div class="code-example">
+&lt;textarea rows="4" cols="50"&gt;Enter text here&lt;/textarea&gt;<br><br>
+&lt;select name="country"&gt;<br>
+    &lt;option value="ke"&gt;Kenya&lt;/option&gt;<br>
+    &lt;option value="us"&gt;USA&lt;/option&gt;<br>
+&lt;/select&gt;<br><br>
+&lt;input type="radio" name="gender" value="male"&gt; Male<br>
+&lt;input type="radio" name="gender" value="female"&gt; Female<br><br>
+&lt;input type="checkbox" name="agree"&gt; I agree
+            </div>
+
+            <h3>Semantic HTML Elements:</h3>
+            <ul>
+                <li>&lt;header&gt; - Header section</li>
+                <li>&lt;nav&gt; - Navigation links</li>
+                <li>&lt;main&gt; - Main content</li>
+                <li>&lt;footer&gt; - Footer section</li>
+                <li>&lt;article&gt; - Independent content</li>
+                <li>&lt;section&gt; - Thematic grouping</li>
+            </ul>
+        </div>
+
+        <div class="questions-section">
+            <h2>📝 Practice Questions - Day 1, 2, & 3</h2>
+            
+            <div class="question">
+                <strong>Q1:</strong> What does HTML stand for?
+            </div>
+            
+            <div class="question">
+                <strong>Q2:</strong> Write the basic structure of an HTML document including DOCTYPE, html, head, and body tags.
+            </div>
+            
+            <div class="question">
+                <strong>Q3:</strong> What is the difference between &lt;strong&gt; and &lt;b&gt; tags?
+            </div>
+            
+            <div class="question">
+                <strong>Q4:</strong> Create an unordered list with 3 items: Apple, Banana, and Orange.
+            </div>
+            
+            <div class="question">
+                <strong>Q5:</strong> Write the HTML code for a link that opens "https://google.com" in a new tab with text "Search Google".
+            </div>
+            
+            <div class="question">
+                <strong>Q6:</strong> What are the 6 heading levels in HTML and which is the largest?
+            </div>
+            
+            <div class="question">
+                <strong>Q7:</strong> How do you create a line break in HTML?
+            </div>
+            
+            <div class="question">
+                <strong>Q8:</strong> Create an ordered list with 3 steps for making tea.
+            </div>
+            
+            <div class="question">
+                <strong>Q9:</strong> What is the purpose of the alt attribute in the img tag?
+            </div>
+            
+            <div class="question">
+                <strong>Q10:</strong> Write HTML code for an image with src="logo.png", alt text "Company Logo", and dimensions 200x100.
+            </div>
+        </div>
+
+        <div class="questions-section">
+            <h2>📝 Practice Questions - Day 4 & 5</h2>
+            
+            <div class="question">
+                <strong>Q11:</strong> What is the difference between &lt;ul&gt; and &lt;ol&gt;?
+            </div>
+            
+            <div class="question">
+                <strong>Q12:</strong> Create a table with 2 columns (Name, Age) and 2 data rows.
+            </div>
+            
+            <div class="question">
+                <strong>Q13:</strong> What does the &lt;th&gt; tag represent in a table?
+            </div>
+            
+            <div class="question">
+                <strong>Q14:</strong> How do you add a border to a table?
+            </div>
+            
+            <div class="question">
+                <strong>Q15:</strong> Write HTML for an image that links to another page when clicked.
+            </div>
+            
+            <div class="question">
+                <strong>Q16:</strong> What are the required attributes for an img tag?
+            </div>
+            
+            <div class="question">
+                <strong>Q17:</strong> Create a table with 3 columns: Product, Price, Quantity.
+            </div>
+            
+            <div class="question">
+                <strong>Q18:</strong> How do you specify the width and height of an image?
+            </div>
+            
+            <div class="question">
+                <strong>Q19:</strong> What is the purpose of &lt;tr&gt; in a table?
+            </div>
+            
+            <div class="question">
+                <strong>Q20:</strong> Create a nested list (list inside a list).
+            </div>
+        </div>
+
+        <div class="questions-section">
+            <h2>📝 Practice Questions - Day 6 & 7</h2>
+            
+            <div class="question">
+                <strong>Q21:</strong> What are the two main attributes of a form tag?
+            </div>
+            
+            <div class="question">
+                <strong>Q22:</strong> Create a form with name and email input fields and a submit button.
+            </div>
+            
+            <div class="question">
+                <strong>Q23:</strong> What is the difference between type="text" and type="email"?
+            </div>
+            
+            <div class="question">
+                <strong>Q24:</strong> How do you create a password input field?
+            </div>
+            
+            <div class="question">
+                <strong>Q25:</strong> Write HTML for a textarea with 5 rows and 30 columns.
+            </div>
+            
+            <div class="question">
+                <strong>Q26:</strong> Create a dropdown menu with 3 country options.
+            </div>
+            
+            <div class="question">
+                <strong>Q27:</strong> What is the purpose of the &lt;label&gt; tag?
+            </div>
+            
+            <div class="question">
+                <strong>Q28:</strong> Create a group of 3 radio buttons for selecting a color.
+            </div>
+            
+            <div class="question">
+                <strong>Q29:</strong> What is the difference between radio buttons and checkboxes?
+            </div>
+            
+            <div class="question">
+                <strong>Q30:</strong> Name 3 semantic HTML5 elements and their purposes.
+            </div>
+        </div>
+
+        <div class="footer">
+            <button onclick="alert('Contact us at: mullertechofficial@gmail.com\nPhone: +254 123 456 789')">📧 Contact Us</button>
+            <button onclick="alert('Report errors to: support@mullertech.com\nWe appreciate your feedback!')">⚠️ Report Errors</button>
+            
+            <div class="copyright">
+                <p>©️ by Lord Muller</p>
+                <p>®Muller Tech official family since 2023®</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const messageDiv = document.getElementById('message');
+            
+            if (password === 'lordmullertech') {
+                messageDiv.innerHTML = '<div class="success-message">Welcome to HTML learning classes by Muller Tech</div>';
+                setTimeout(() => {
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                }, 2000);
+            } else {
+                messageDiv.innerHTML = '<div class="error-message">❌ Password error contact Developer for guidance...</div>';
+            }
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
