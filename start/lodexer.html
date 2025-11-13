@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muller Tech - File Hosting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(45deg, blue, purple, indigo, #9370db, red, #ff0080);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+.menu-container {
+  position: relative;
+  z-index: 1000;
+}
+
+.menu-btn {
+  background: linear-gradient(135deg, red, #2a00b7,green, #8e2de2, #ff0080);
+  color: white;
+  border: none;
+  padding: 12px 35px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.menu-btn:hover {
+  transform: scale(1.05);
+}
+
+
+.menu-dropdown {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 260px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: left 0.4s ease;
+}
+
+.menu-dropdown.active {
+  left: 0;
+}
+
+
+.menu-item {
+  background: linear-gradient(90deg,blue,red,green,blue);
+  background-size: 300% 300%;
+  animation: colorShift 8s ease infinite;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.menu-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+/* Smooth color animation */
+@keyframes colorShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+        .lang-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .ring-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+     
+    
+        .rotating-ring {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            top: -10px;
+            left: -10px;
+            border-radius: 100%;
+            background: conic-gradient(
+                from 0deg,
+                #ff0080,
+                black,
+                white,
+                red,
+                #ff8c00,
+                maroon,
+                #40e0d0,
+                blue,
+                #9d4edd,
+                #000,
+                #06ffa5,
+                indigo,
+                #ff0080
+            );
+            animation: rotate 1s linear infinite;
+            padding: 3px;
+        }
+
+        @keyframes rotateRing {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        .profile-pic {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            animation: rotateClockwise 10s linear infinite;
+            border: 4px solid white;
+        }
+
+        @keyframes rotateClockwise {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            min-width: 150px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .upload-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 25px;
+            margin-bottom: 40px;
+        }
+
+        .upload-title {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .upload-area {
+            border: 3px dashed blue;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .upload-area:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .upload-area input {
+            display: none;
+        }
+
+        .upload-text {
+            color: white;
+            font-size: 18px;
+        }
+
+        .files-list {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 25px;
+        }
+
+        .files-title {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .file-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .file-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .time-remaining {
+            color: #40e0d0;
+            font-size: 14px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg,purple 0%,red 50%,blue 80%,green 100%);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 105px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #40e0d0;
+        }
+
+        .copyright {
+            margin: 60px 0;
+            font-size: 21px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .lang-selector {
+                flex-wrap: wrap;
+            }
+
+            .stats-container {
+                gap: 20px;
+            }
+
+            .upload-section, .files-list {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="menu-container">
+            <button class="menu-btn" onclick="toggleMenu()">☰ MENU</button>
+            <div class="menu-dropdown" id="menuDropdown">
+              <a href="https://wa.me/254786299213?text=Hello%20MullerTech%20howau" class="menu-item" data-translate="owner">OWNER</a>
+                <a href="https://whatsapp.com/channel/0029VbA6BUbCHDymv2WCqu2g" class="menu-item" data-translate="channel">WHATSAPP CHANNEL</a>
+                <a href="https://chat.whatsapp.com/LosLnSl6TO42gfn8ESuBNZ?mode=wwt" class="menu-item" data-translate="group">OFFICIAL GROUP</a>
+                <a href="#" class="menu-item" data-translate="youtube">YOUTUBE CHANNEL</a>
+            </div>
+        </div>
+
+        <div class="lang-selector">
+            <button class="lang-btn active" onclick="changeLang('en')">EN🇲🇾</button>
+            <button class="lang-btn" onclick="changeLang('sw')">SW🇺🇬</button>
+            <button class="lang-btn" onclick="changeLang('fr')">FR🇬🇧</button>
+            <button class="lang-btn" onclick="changeLang('ur')">PK🇲🇼</button>
+        </div>
+    </div>
+
+    <div class="profile-section">
+        <div class="ring-container">
+            <div class="rotating-ring"></div>
+            <img src="Media/muller.jpg" alt="Profile" class="profile-pic" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23667eea%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2240%22 font-family=%22Arial%22%3EM%3C/text%3E%3C/svg%3E'">
+        </div>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-label" data-translate="followers">FOLLOWERS 🤼</div>
+            <div class="stat-value" id="followers">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label" data-translate="active">ACTIVE 🟢</div>
+            <div class="stat-value" id="active">1</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label" data-translate="time">TIME ⌚</div>
+            <div class="stat-value" id="timeSpent">0:00</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="upload-section">
+            <h2 class="upload-title" data-translate="uploadTitle">UPLOAD ZIP FILES</h2>
+            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                <input type="file" id="fileInput" accept=".zip" onchange="handleFileUpload(event)">
+                <p class="upload-text" data-translate="uploadText">Drag & Drop ☯️files here</p>
+            </div>
+        </div>
+
+        <div class="files-list">
+            <h2 class="files-title" data-translate="filesTitle">👇UPLOADED ZIPS FILES👇</h2>
+            <div id="filesList"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+                   <a href="https://wa.me/254786299213?text=Hello%20MullerTech%20❓"  class="footer-link" data-translate="contact">Contact Us</a>
+            <a href="#" class="footer-link" data-translate="channel">Join official Channel</a>
+        </div>
+        <div class="copyright">©️ Copyright By Lord Muller</div>
+        <div>®Muller Tech Official Trusted Family Since 2023®</div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                owner: "OWNER",
+                channel: "WHATSAPP CHANNEL",
+                group: "OFFICIAL GROUP",
+                youtube: "OFFICIAL YT CHANNEL",
+                followers: "FOLLOWERS",
+                active: "ACTIVE",
+                time: "TIME",
+                uploadTitle: "UPLOAD ZIP FILES",
+                uploadText: "Click to UPLOAD ☯️ ZIP file",
+                filesTitle: "UPLOADED FILES",
+                contact: "Contact Us",
+                hoursLeft: "hours left",
+                minutesLeft: "minutes left"
+            },
+            sw: {
+                owner: "MMILIKI",
+                channel: "KITUO CHA WHA",
+                group: "KIKUNDI RASMI",
+                youtube: "KITUO RASMI CHA YT",
+                followers: "WAFUASI 🤼",
+                active: "HAI 🟢",
+                time: "MUDA ⌚",
+                uploadTitle: "PAKIA FAILI ZA ZIP",
+                uploadText: "Bofya Kupakia ☯️faili ya ZIP",
+                filesTitle: "FAILI ZILIZOPAKIWA",
+                contact: "Wasiliana Nasi",
+                hoursLeft: "masaa yaliyobaki",
+                minutesLeft: "dakika zilizobaki"
+            },
+            fr: {
+                owner: "PROPRIÉTAIRE",
+                channel: "CANAL WHATSAPP",
+                group: "GROUPE OFFICIEL",
+                youtube: "CANAL YT OFFICIEL",
+                followers: "ABONNÉS 🤼",
+                active: "ACTIF 🟢",
+                time: "TEMPS ⌚",
+                uploadTitle: "TÉLÉCHARGER DES FICHIERS ZIP",
+                uploadText: "Cliquez pour télécharger un FICHIER ☯️ ZIP",
+                filesTitle: "FICHIERS TÉLÉCHARGÉS",
+                contact: "Contactez-nous",
+                hoursLeft: "heures restantes",
+                minutesLeft: "minutes restantes"
+            },
+            ur: {
+                owner: "مالک",
+                channel: "چینل WHA",
+                group: "سرکاری گروپ",
+                youtube: "سرکاری YT چینل",
+                followers: "پیروکار",
+                active: "فعال",
+                time: "وقت",
+                uploadTitle: "ZIP فائلیں اپ لوڈ کریں",
+                uploadText: "ZIP فائل اپ لوڈ کرنے کے لیے کلک کریں",
+                filesTitle: "اپ لوڈ شدہ فائلیں",
+                contact: "ہم سے رابطہ کریں",
+                hoursLeft: "گھنٹے باقی",
+                minutesLeft: "منٹ باقی"
+            }
+        };
+
+        let currentLang = 'en';
+        let files = [];
+        let startTime = Date.now();
+        let totalVisitors = 0;
+
+        function toggleMenu() {
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            const menu = document.querySelector('.menu-container');
+            if (!menu.contains(e.target)) {
+                document.getElementById('menuDropdown').classList.remove('active');
+            }
+        });
+
+        function changeLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            renderFiles();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.name.endsWith('.zip')) {
+                alert('Please upload only ZIP files');
+                return;
+            }
+
+            const fileObj = {
+                name: file.name,
+                uploadTime: Date.now(),
+                expiryTime: Date.now() + (48 * 60 * 60 * 1000),
+                file: file
+            };
+
+            files.push(fileObj);
+            renderFiles();
+            event.target.value = '';
+        }
+
+        function renderFiles() {
+            const container = document.getElementById('filesList');
+            
+            if (files.length === 0) {
+                container.innerHTML = '<p style="color: white; text-align: center;">No files uploaded yet</p>';
+                return;
+            }
+
+            container.innerHTML = files.map((file, index) => {
+                const timeLeft = file.expiryTime - Date.now();
+                const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                
+                const timeText = hoursLeft > 0 
+                    ? `${hoursLeft}h ${minutesLeft}m ${translations[currentLang].hoursLeft}`
+                    : `${minutesLeft} ${translations[currentLang].minutesLeft}`;
+
+                return `
+                    <div class="file-item">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-info">
+                            <span class="time-remaining">⏱️ ${timeText}</span>
+                            <button class="download-btn" onclick="downloadFile(${index})">Download</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function downloadFile(index) {
+            const file = files[index].file;
+            const url = URL.createObjectURL(file);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.name;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function checkExpiredFiles() {
+            const now = Date.now();
+            files = files.filter(file => file.expiryTime > now);
+            renderFiles();
+        }
+
+        function updateStats() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('timeSpent').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function initStats() {
+            totalVisitors = Math.floor(Math.random() * 1000) + 100;
+            document.getElementById('followers').textContent = totalVisitors;
+            document.getElementById('active').textContent = Math.floor(Math.random() * 10) + 1;
+        }
+
+        setInterval(checkExpiredFiles, 60000);
+        setInterval(updateStats, 1000);
+        setInterval(() => {
+            document.getElementById('active').textContent = Math.floor(Math.random() * 10) + 1;
+        }, 30000);
+
+        initStats();
+        renderFiles();
+    </script>
+</body>
+</html>
